@@ -16,7 +16,7 @@ Two test programs are available:
 By exchanging the engine, either program can be run on either engine without changes.
 
 
-### prerequisites
+### Prerequisites
 
 For running the program
 - install java 8 
@@ -55,7 +55,7 @@ java -cp wordCounter-1.0.jar:parallel-1.0.jar:common-1.0.jar de.datapedion.mapRe
 ```
 
 
-The averageRating program need two text files. First the ratings file and second the movie files.
+The averageRating program requires two text files, the ratings file and the movie files.
 
 
 Average Movie Ratings of ratings.txt and movie.txt run by single-core-engine:
