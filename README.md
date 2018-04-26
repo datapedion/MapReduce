@@ -1,6 +1,8 @@
 # map-reduce engine
 
-An implementation of map-reduce engines using Java 8 Streams.
+An implementation of a map-reduce engine using Java 8 Streams. 
+Comparing the speed of a single threaded and multithreaded application on a local host.
+
 Allowing programs structured in the map-reduce paradigm to be executed. 
 
 Two engines are available:
@@ -89,10 +91,7 @@ maven clean install
 
 ### Known Issues
 
-- No help or manual files
-- No failure or exception handling 
-- Documentation is basic
-
+- Streams and Pairs are not the perfect solution for this problem.
 
 ## Software used
 
@@ -113,8 +112,18 @@ e) single-threading of the reduce step
 
 A next step in optimization for a-d) would be to use a profiler for more precise monitoring of the results. 
 For e) parallelization of the reduce step should be tested. 
+f) streams and pairs in combination makes the solution working, but there are ways to improve speed:
 
-
+```
+JavaRDD<String> textFile = sc.textFile("hdfs://...");
+JavaPairRDD<String, Integer> counts = textFile
+    .flatMap(s -> Arrays.asList(s.split(" ")).iterator())
+    .mapToPair(word -> new Tuple2<>(word, 1))
+    .reduceByKey((a, b) -> a + b);
+counts.saveAsTextFile("hdfs://...");
+  
+```
+https://spark.apache.org/examples.html
 
 
 
